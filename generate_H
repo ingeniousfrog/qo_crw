@@ -1,0 +1,14 @@
+#! /usr/bin/env python
+import numpy as np
+
+def H_rabi(N,wc,wa,g):
+    H_rabi = np.zeros(shape = (2*N,2*N))
+    for i in range(N):
+        H_rabi[2*(N-i)-1,2*(N-i)-1] = i*wc-wa/2.0
+	H_rabi[2*(N-i-1),2*(N-i-1)] = i*wc+wa/2.0
+	if i < N-1:
+	   H_rabi[2*(N-i)-1,2*(N-i)-4] = g*np.sqrt(i+1)
+	   H_rabi[2*(N-i)-4,2*(N-i)-1] = g*np.sqrt(i+1)
+	   H_rabi[2*(N-i-1),2*(N-i)-3] = g*np.sqrt(i+1)
+	   H_rabi[2*(N-i)-3,2*(N-i-1)] = g*np.sqrt(i+1)
+    return H_rabi
